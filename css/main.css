@@ -733,7 +733,8 @@ p {
   top: 0;
   left: 0;
   height: 50px;
-  z-index: 1000; }
+  z-index: 1000;
+  pointer-events: none; }
 
 #page-overlay {
   position: fixed;
