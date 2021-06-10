@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+
+    <title>Flexbox cheatsheet</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/libs.css">
+    <link rel="stylesheet" href="css/main.css">
+
+  </head>
+
+  <body class="flexbox-page">
+    <div id="wrapper">
+      <header class="main-header"></header>
+
+      <div id="page-overlay"></div>
+
+      <main class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="aside-toggle"><span></span><span></span><span></span></div>
+
+              <aside class="aside-nav">
+                <div class="h3">Flex container</div>
+
+                <ul>
+                  <li><a href="#flex-display" class="link-to">display</a></li>
+                  <li><a href="#flex-direction" class="link-to">flex-direction</a></li>
+                  <li><a href="#flex-wrap" class="link-to">flex-wrap</a></li>
+                  <li><a href="#flex-flow" class="link-to">flex-flow</a></li>
+                  <li><a href="#flex-justify-content" class="link-to">justify-content</a></li>
+                  <li><a href="#flex-align-items" class="link-to">align-items</a></li>
+                  <li><a href="#flex-align-content" class="link-to">align-content</a></li>
+                </ul>
+
+                <div class="h3">Flex items</div>
+
+                <ul>
+                  <li><a href="#align-self" class="link-to">align-self</a></li>
+                  <li><a href="#flex-grow" class="link-to">flex-grow</a></li>
+                  <li><a href="#flex-shrink" class="link-to">flex-shrink</a></li>
+                  <li><a href="#flex-shrink" class="link-to">flex-basis</a></li>
+                  <li><a href="#child-flex" class="link-to">flex</a></li>
+                  <li><a href="#flex-order" class="link-to">order</a></li>
+                </ul>
+
+                <div class="aside-nav-close"></div>
+              </aside>
+            </div>
+
+            <div class="col-lg-9">
+              <section class="flexbox-section">
+                <h1>Шпаргалка Flexbox</h1>
+
+                <p>Даний документ створений для швидкого візуального та частково теоретичного ознайомлення з властивостями <a href="https://www.w3.org/TR/css-flexbox/">Flexbox (CSS Flexible Box Layout Module). </a></p>
+
+                <div class="spoiler-container" id="spoiler-1">
+                  <div class="spoiler-title">Базові значення та термінологія</div>
+
+                  <div class="spoiler-content">
+                    <p>Flexbox - це CSS модуль, що включає в себе елементи з певним набором властивостей. Деякі з них використовуються для контейнера (батьківський елемент, що прийнято називати "flex-контейнер"), в той час, як інші використовуються для дочірніх елементів "flex-елементи".</p>
+
+                    <p>Елементи в контейнері розташовуються або в напрямку головної осі (main axis від main-start до main-end) або в напрямку поперечної осі (cross axis від cross-start до cross-end). Напрямки цих осей можуть змінюватись в залежностві від значення <code>flex-direction</code></p>
+
+                    <div class="img-container">
+                      <img src="img/flexbox/flexbox-flow.svg" alt="flow">
+                    </div>
+
+                    <p><b>main axis</b> - головна вісь flex-контейнера уздовж якої розташовуються flex-елементи. Ця вісь може бути горизонтальною або вертикальною, в залежності від значення властивості flex-direction.</p>
+
+                    <p><b>main start | main end</b> - flex-елементи розміщаються в контейнері починаючи з main-start та закінчуючи main-end.</p>
+
+                    <p><b>cross axis</b> - вісь перпендикулярна до головної осі (main axis). Її напрямок залежить від напрямку головної осі.</p>
+
+                    <p><b>cross start | cross end</b> - flex-ряди заповнюються елементами та поміщаються в контейнер, починаючи від cross start flex-контейнера у напрямку до cross end.</p>
+
+                    <br>
+
+                    <p>Властивості flexbox можна поділити наступним чином:</p>
+
+                    <img src="img/flexbox/flexbox-props.svg" alt="flexbox">
+
+                    <br><br>
+                  </div>
+                </div>
+
+                <p>Властивості flexbox можна поділити на дві групи, одна для flex-контейнера, а інша для flex-елементів. Також властивості можна поділити на: напрямок - вирівнювання - розмір. В даному документі розглянемо перший варіант.</p>
+
+                <br>
+
+                <h2>Властивості flexbox для контейнера</h2>
+
+                <div class="playground-container" id="flex-display">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#flex-containers">display</a></h2>
+
+                  <p>Для створення flexbox-контейнера необхідно задати правило <code>display: flex;</code>  або  <code>display: inline-flex;</code> для батьківського HTML-елемента</p>
+
+
+                  <div class="spoiler-container" id="spoiler-1">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+
+                      <p>Після створення flex-контейнера за допомогою властивості <code>display: flex;</code> або <code>display: inline-flex;</code> усі безпосередні дочірні елементи автоматично стають flex-елементами. Значення за замовчуванням для деяких початкових CSS властивостей вже визначені, тому після створення flex-контейнера усі flex-елементи, що містяться в ньому будуть поводитись певним чином:</p>
+
+                      <ul>
+                        <li>Елементи відображаються в ряд (властивість <code>flex-direction</code> за замовчуванням має значення <code>row</code>)</li>
+
+                        <li>Позиціонування елементів починається від початку Головної осі (main axis)</li>
+
+                        <li>Елементи не розтягуються по основній осі, але можуть стискатися</li>
+
+                        <li>Елементи розтягуються, щоб заповнити простір поперечної осі (cross axis)</li>
+
+                        <li>Властивості <code>flex-basis</code> задано значення <code>auto</code></li>
+
+                        <li>Властивості <code>flex-wrap</code> задано значення <code>nowrap</code></li>
+                      </ul>
+
+                      <br>
+
+                      <img src="img/flexbox/flex-display.svg" alt="flex">
+
+                      <p><small><code>display: flex;</code> - контейнер стане блочного рівня та займатиме весь доступний горизонтальний простір</small></p>
+
+                      <br>
+
+                      <img src="img/flexbox/inline-flex-display.svg" alt="flex">
+
+                      <p><small><code>display: inline-flex;</code> - контейнер стане інлайнового рівня та буде займати простір залежний від розміру елементів.</small></p>
+
+
+                      <p>Flex-контейнер не є звичним блочним чи інлайновим контейнером, тому деякі CSS властивості не застосовуються в контексті flex розміщення. Зокрема:</p>
+
+                      <ul>
+                        <li>float і clear не створюють/забороняють "плавання" елемента та не виносять елементи з потоку;</li>
+
+                        <li>css властивість columns не впливає на flex-контейнер;</li>
+
+                        <li>псевдоелементи ::first-line та ::first-letter не застосовуються до flex-контейнера;</li>
+
+                        <li>vertical-align не впливає на flex-елементи.</li>
+                      </ul>
+
+                    </div>
+                  </div>
+                  
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="container-flex">flex</button> 
+                    <button class="control-btn" data-value="container-inline-flex">inline-flex</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container container-flex">
+                        <div class="block-item">Block element</div>
+
+                        <div class="flex-container-box">
+                          <div class="item"><span>1</span></div>
+                          <div class="item"><span>2</span></div>
+                          <div class="item"><span>3</span></div>
+                        </div>
+                      </div>
+
+                      <br><br>
+
+                      <div class="flex-container container-flex">
+                        <span class="inline-item">Inline element</span>
+
+                        <div class="flex-container-box">
+                          <div class="item"><span>1</span></div>
+                          <div class="item"><span>2</span></div>
+                          <div class="item"><span>3</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                        <div class="code-property">
+                          <mark>display: <span class="code-property-value">flex</span>;</mark>
+                        </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="playground-container" id="flex-direction">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#flex-direction-property">flex-direction</a></h2>
+
+                  <p>Ця властивість вказує, як flex-елементи розміщаються у flex-контейнері шляхом задання напрямку головної осі (main axis) flex-контейнера. Вони можуть розміщатись в двох напрямках, горизонтально, як рядки та вертикально, як колонки.</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <p>Для потрібного розміщення flex-елементів потрібно мислити з точки зору двох осей - головної осі (main axis) та побічної осі (cross axis). Головна вісь визначається властивістю flex-direction, а побічна вісь проходить перпендикулярно.</p>
+
+                      <ul>
+                        <li><b>row</b> (значення за замовчуванням): елементи розташовуються зліва направо (в ltr контексті та зправа наліво в rtl)</li>
+                        <li><b>row-reverse</b> - елементи розташовуються справа наліво ltr, зліва направо в rtl</li>
+                        <li><b>column</b> - елементи розташовуються зверху вниз</li>
+                        <li><b>column-reverse</b> - елементи розташовуються знизу вгору</li>
+                      </ul>
+
+                      <br>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <img src="img/flexbox/flex-direction-row.svg" alt="flex">
+                          
+                          <br><br><br><br>
+                        </div>
+
+                        <div class="col-md-6">
+                          <img src="img/flexbox/flex-direction-row-reverse.svg" alt="flex">
+
+                          <br><br><br><br>
+                        </div>
+
+                        <div class="col-md-6">
+                          <img src="img/flexbox/flex-direction-column.svg" alt="flex">
+                        </div>
+
+                        <div class="col-md-6">
+                          <img src="img/flexbox/flex-direction-column-reverse.svg" alt="flex">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="flex-row">row</button> 
+                    <button class="control-btn" data-value="row-reverse">row-reverse</button> 
+                    <button class="control-btn" data-value="column">column</button> 
+                    <button class="control-btn" data-value="column-reverse">column-reverse</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container flex-row">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item"><span>3</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+
+                          <div class="code-property">
+                            <mark>flex-direction: <span class="code-property-value">row</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-wrap">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#flex-wrap-property">flex-wrap</a></h2>
+
+                  <p>Властивість flex-wrap керує тим, як flex-контейнер буде розміщати свої елементи - в один або декілька рядків, а також напрямок розміщення рядків.</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+
+                      <p>За замовчуванням flex-елементи будуть намагатися вміститися в один рядок. При необхідності їм можна дозволити переноситись на новий рядок</p>
+                      
+                      <ul>
+                        <li><b>nowrap</b> - значення замовчуванням, при якому всі flex-елементи будуть вибудовуватися в одну лінію.</li>
+                        <li><b>wrap</b> - flex-елементи будуть переноситись на кілька рядків, від верху до низу.</li>
+                        <li><b>wrap-reverse</b> - flex-елементи будуть переноситись на кілька рядків від низу до верху.</li>
+                      </ul>
+
+                      <br>
+
+                      <img src="img/flexbox/wrap-original.svg" alt="wrap">
+
+                      <br><br>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <img src="img/flexbox/nowrap.svg" alt="wrap">
+
+                            <p><small>Flex-елементи відображаються в один ряд та звужуються, щоб уміститися в ширину flex-контейнера.</small></p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img src="img/flexbox/wrap.svg" alt="wrap">
+
+                            <p><small>Flex-елементи відображаються в кілька рядів, зліва направо і зверху вниз</small></p>
+                        </div>
+
+                        <div class="col-md-6">
+                          <img src="img/flexbox/wrap-reverse.svg" alt="wrap">
+
+                          <p><small>Flex-елементи відображаються в кілька рядів, зліва направо і знизу вгору.</small></p>
+                        </div>
+                      </div>
+
+                
+                      <p>Ці властивості залежать від режиму напрямку письма, тому в rtl-контексті вони відповідно будуть перевернуті.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="nowrap">nowrap</button> 
+                    <button class="control-btn" data-value="wrap">wrap</button> 
+                    <button class="control-btn" data-value="wrap-reverse">wrap-reverse</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container nowrap">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item"><span>3</span></div>
+                        <div class="item"><span>4</span></div>
+                        <div class="item"><span>5</span></div>
+                        <div class="item"><span>6</span></div>
+                        <div class="item"><span>7</span></div>
+                        <div class="item"><span>8</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+
+                          <div class="code-property">
+                            <mark>flex-wrap: <span class="code-property-value">nowrap</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-flow">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#flex-flow-property">flex-flow</a></h2>
+
+                  <p>Властивість flex-flow - це скрочений запис для властивостей flex-direction та flex-wrap. Значення за замовчуванням: row nowrap</p>
+
+                  <p><code>flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;</code></p>
+          
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="row-nowrap">row nowrap</button> 
+                    <button class="control-btn" data-value="row-wrap">row wrap</button>
+                    <button class="control-btn" data-value="row-wrap-reverse">row wrap-reverse</button>
+
+                    <button class="control-btn" data-value="row-reverse-nowrap">row-reverse nowrap</button>
+                    <button class="control-btn" data-value="row-reverse-wrap">row-reverse wrap</button>
+                    <button class="control-btn" data-value="row-reverse-wrap-reverse">row-reverse wrap-reverse</button>
+
+                    <button class="control-btn" data-value="column-nowrap">column nowrap</button> 
+                    <button class="control-btn" data-value="column-wrap">column wrap</button>
+                    <button class="control-btn" data-value="column-wrap-reverse">column wrap-reverse</button>
+
+                    <button class="control-btn" data-value="column-reverse-nowrap">column-reverse nowrap</button>
+                    <button class="control-btn" data-value="column-reverse-wrap">column-reverse wrap</button>
+                    <button class="control-btn" data-value="column-reverse-wrap-reverse">column-reverse wrap-reverse</button>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container row-nowrap">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item"><span>3</span></div>
+                        <div class="item"><span>4</span></div>
+                        <div class="item"><span>5</span></div>
+                        <div class="item"><span>6</span></div>
+                        <div class="item"><span>7</span></div>
+                        <div class="item"><span>8</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+
+                          <div class="code-property">
+                            <mark>flex-flow: <span class="code-property-value">row nowrap</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-justify-content">
+                  <h2><a href="http://w3.unpocodetodo.info/css3/flex-direction.php">justify-content</a></h2> 
+
+                  <p>Властивість justify-content вирівнює flex-елементи відносно основної осі (main axis).</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <ul>
+                        <li><b>flex-start</b> (за замовчуванням) - елементи розміщені на початку основної осі</li>
+
+                        <li><b>flex-end</b> - елементи розміщені в кінці основної осі</li>
+
+                        <li><b>center</b> - елементи центровані по основній осі</li>
+
+                        <li><b>space-between</b> - елементи рівномірно розподілені по лінії, перший елемент "прибитий" до початку рядка, останній елемент в кінці</li>
+                        
+                        <li><b>space-around</b> - елементи рівномірно розподілені по лінії з однаковим простором навколо них.</li>
+                        
+                        <li><b>space-evenly</b> - елементи розподіляються таким чином, щоб відстань між будь-якими двома елементами та відстань до країв були однаковими.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="justify-start">flex-start</button> 
+                    <button class="control-btn" data-value="justify-end">flex-end</button> 
+                    <button class="control-btn" data-value="justify-center">center</button> 
+                    <button class="control-btn" data-value="justify-space-between">space-between</button> 
+                    <button class="control-btn" data-value="justify-space-around">space-around</button> 
+                    <button class="control-btn" data-value="justify-space-evenly">space-evenly</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container flex-start">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item"><span>3</span></div>
+                        <div class="item"><span>4</span></div>
+                        <div class="item"><span>5</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+
+                          <div class="code-property">
+                            <mark>justify-content: <span class="code-property-value">flex-start</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-align-items">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#align-items-property">align-items</a></h2>
+
+                  <p>Властивість align-items вирівнює flex-елементи вздовж поперечної осі (cross axis), перпендикулярно до основної осі (main axis).</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <ul>
+                        <li><b>stretch</b> (за замовчуванням) - елементи розтягуються та заповнюють всю висоту поперечної осі (cross axis) flex-контейнера</li>
+                        
+                        <li><b>flex-start</b> - елементи розміщуються на початку поперечної осі</li>
+                      
+                        <li><b>flex-end</b> - елементи розташовуються в кінці поперечної осі</li>
+                        
+                        <li><b>center</b> - елементи розташовуються по центру по поперечної осі</li>
+
+                        <li><b>baseline</b> - елементи вирівнюються по базовій лінії</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="flex-stretch">stretch</button> 
+                    <button class="control-btn" data-value="flex-start">flex-start</button> 
+                    <button class="control-btn" data-value="flex-end">flex-end</button> 
+                    <button class="control-btn" data-value="flex-center">center</button> 
+                    <button class="control-btn" data-value="flex-baseline">baseline</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container flex-stretch" style="height: 300px;">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item" style="font-size: 42px"><span>3</span></div>
+                        <div class="item"><span>4</span></div>
+                        <div class="item"><span>5</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+
+                          <div class="code-property">
+                            <mark>align-items: <span class="code-property-value">stretch</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-align-content">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#align-content-property">align-content</a></h2>
+
+                  <p>Властивість align-content вирівнює рядки flex-контейнера по поперечній осі (cross axis).</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <ul>
+                        <li><b>stretch</b> (за замовчуванням) - ряди розтягуються та заповнюють всю висоту поперечної осі </li>
+
+                        <li><b>flex-start</b> - ряди flex-елементів розміщуються на початку поперечної осі flex-контейнера</li>
+                        
+                        <li><b>flex-end</b> - ряди flex-елементів розміщуються в кінці поперечної осі flex-контейнера</li>
+                        
+                        <li><b>center</b> - ряди flex-елементів розміщуються по центру поперечної осі flex-контейнера</li>
+                        
+                        <li><b>space-between</b> - ряди flex-елементів відображаються з рівним інтервалом між ними, перший та останній ряд вирівнюється по краях flex-контейнера.</li>
+                        
+                        <li><b>space-around</b> - flex-елементи відображаються з рівним простором навколо кожного ряду flex-елементів.</li>
+                        
+                        <li><b>space-evenly</b> - елементи розподіляються таким чином, щоб відстань між рядами та відстань до країв були однаковими</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="align-content-stretch">stretch</button> 
+                    <button class="control-btn" data-value="align-content-start">flex-start</button> 
+                    <button class="control-btn" data-value="align-content-end">flex-end</button> 
+                    <button class="control-btn" data-value="align-content-center">center</button> 
+                    <button class="control-btn" data-value="align-content-space-between">space-between</button> 
+                    <button class="control-btn" data-value="align-content-space-around">space-around</button> 
+                    <button class="control-btn" data-value="align-content-space-evenly">space-evenly</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container align-content-stretch" style="height: 500px;">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item"><span>3</span></div>
+                        <div class="item"><span>4</span></div>
+                        <div class="item"><span>5</span></div>
+                        <div class="item"><span>6</span></div>
+                        <div class="item"><span>7</span></div>
+                        <div class="item"><span>8</span></div>
+                        <div class="item"><span>9</span></div>
+                        <div class="item"><span>10</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+
+                          <div class="code-property">
+                            <mark>align-content: <span class="code-property-value">stretch</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <h2>Властивості для flexbox елементів</h2>
+
+                <div class="playground-container" id="align-self">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#align-items-property">align-self</a></h2>
+
+                  <p>Властивість align-self перевизначає вирівнюванння за замовчуванням чи те значення, що вказане в align-items для flex-елементів.</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <ul>
+                        <li><b>auto</b> (за замовчуванням) - приймає значення <code>align-items</code> flex-контейнера</li>
+
+                        <li><b>flex-start</b> - елементи розміщуються на початку поперечної осі</li>
+                      
+                        <li><b>flex-end</b> - елементи розташовуються в кінці поперечної осі</li>
+                        
+                        <li><b>center</b> - елементи розташовуються по центру по поперечної осі</li>
+
+                        <li><b>baseline</b> - елементи вирівнюються по базовій лінії контейнера</li>
+
+                        <li><b>stretch</b>  - елементи розтягуються та заповнюють всю висоту поперечної осі (cross axis) flex-контейнера</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="align-seft-auto">auto</button> 
+                    <button class="control-btn" data-value="align-seft-stretch">stretch</button> 
+                    <button class="control-btn" data-value="align-seft-start">flex-start</button> 
+                    <button class="control-btn" data-value="align-seft-end">flex-end</button> 
+                    <button class="control-btn" data-value="align-seft-center">center</button> 
+                    <button class="control-btn" data-value="align-seft-baseline">baseline</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container align-seft-auto" style="height: 400px; align-items: center; justify-content: center;">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item third-item"><span>3</span></div>
+                        <div class="item"><span>4</span></div>
+                        <div class="item"><span>5</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+
+                          <div class="code-property">
+                            align-items: center;
+                          </div>
+
+                          <div class="code-property">
+                            justify-content: center;
+                          </div>
+                        }
+
+                        <br><br>
+
+                        .third-item {
+                          <div class="code-property">
+                            <mark>align-seft: <span class="code-property-value">auto</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-grow">
+                  <h2><a href="http://w3.unpocodetodo.info/css3/flex-direction.php">Flex grow</a></h2>
+
+                  <p>Властивість flex-grow вказує на скільки буде ростягнутим flex-елемент відносно інших flex-елементів в контейнері при розподілі вільного простору. Значення за замовчуванням: 0. Від'ємні значення ігноруються.</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <p>Формула за якою відбувається розрахунок розтягування елементів виглядає наступним чином:</p>
+
+                      <br>
+
+                      <img src="img/flexbox/flex-grow-formula.svg" alt="flexbox">
+
+                      <br><br><br>
+
+                      <p><b>Нова ширина елемента</b> = ((flex-grow елемента / сума значень flex-grow) * доступний вільний простір) + початкова ширина елемента</p>
+
+                      <br>
+
+                      <p>Якщо 3 елементу на зображенні задати значення <code>flex-grow: 1;</code>, то його ширина буде розраховуватись наступним чином:</p>
+
+                      <img src="img/flexbox/flex-grow-result-1.svg" alt="flexbox">
+
+                      <br><br><br>
+
+                      <p>Якщо 1 елементу задати значення <code>flex-grow: 1;</code>, a 3 елементу<code>flex-grow: 3;</code>то його ширина буде розраховуватись наступним чином:</p>
+
+                      <img src="img/flexbox/flex-grow-result-2.svg" alt="flexbox">
+
+                      <br><br>
+
+                      <p>Оскільки властивість flex-grow приймає цілочисельні значення, в нього можна записати і 0. Це означатиме, що flex-елемент не буде змінювати ширину за умови, що загальна ширина контейнера та ширина області перегляду сторінки буде рівна/більша за ширину елемента.
+                    </div>
+                  </div>
+              
+                  <div class="controls-container">
+                    <div class="control-input"><label for="grow-1">Елемент 1: </label><input type="number" class="flex-grow" data-grow-input="1" id="grow-1" min="0"></div>
+                    <div class="control-input"><label for="grow-2">Елемент 2: </label><input type="number" class="flex-grow" data-grow-input="2" id="grow-2" min="0"></div>
+                    <div class="control-input"><label for="grow-3">Елемент 3: </label><input type="number" class="flex-grow" data-grow-input="3" id="grow-3" min="0"></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container grow-container">
+                        <div class="item" data-grow-item="1"><span>1</span></div>
+                        <div class="item" data-grow-item="2"><span>2</span></div>
+                        <div class="item" data-grow-item="3"><span>3</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-1 {
+                          <div class="code-property">
+                            <mark>flex-grow: <span class="code-property-value" data-grow-css="1">0</span>;</mark>
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-2 {
+                          <div class="code-property">
+                            <mark>flex-grow: <span class="code-property-value" data-grow-css="2">0</span>;</mark>
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-3 {
+                          <div class="code-property">
+                            <mark>flex-grow: <span class="code-property-value" data-grow-css="3">0</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-shrink">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#flex-shrink-property">flex-shrink</a></h2>
+
+                  <p>Властивість flex-shrink визначає наскільки буде звужений flex-eлемент відносно інших flex-елементів в контейнері при розподілі негативного вільного простору.</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <p>Якщо змінити значення flex-shrink на 0 (не звужуватись), то він збереже свій відносний розмір. Значення за замовчуванням: 1. Від'ємні значення ігноруються.</p>
+
+                      <p>Елемент зберігатиме свою ширину за умови, що:</p>
+
+                      <ul>
+                        <li>загальна ширина всіх flex-елементів буде меншою за ширину контейнера;</li>
+                        <li>ширина області перегляду сторінки буде рівна/більша за ширину елемента.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="controls-container">
+                    <div class="control-input"><label for="shrink-1">Елемент 1: </label><input type="number" class="flex-shrink" data-shrink-input="1" id="shrink-1" min="0" value="1"></div>
+                    <div class="control-input"><label for="shrink-2">Елемент 2: </label><input type="number" class="flex-shrink" data-shrink-input="2" id="shrink-2" min="0" value="1"></div>
+                    <div class="control-input"><label for="shrink-3">Елемент 3: </label><input type="number" class="flex-shrink" data-shrink-input="3" id="shrink-3" min="0" value="1"></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container shrink-container">
+                        <div class="item" data-shrink-item="1"><span>1</span></div>
+                        <div class="item" data-shrink-item="2"><span>2</span></div>
+                        <div class="item" data-shrink-item="3"><span>3</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-1 {
+                         <div class="code-property">width: 100px;</div>
+                        }
+
+                        .item-1 {
+                          <div class="code-property">
+                            <mark>flex-shrink: <span class="code-property-value" data-shrink-css="1">1</span>;</mark>
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-2 {
+                          <div class="code-property">
+                            <mark>flex-shrink: <span class="code-property-value" data-shrink-css="2">1</span>;</mark>
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-3 {
+                          <div class="code-property">
+                            <mark>flex-shrink: <span class="code-property-value" data-shrink-css="3">1</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-basis">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#flex-basis-property">flex-basis</a></h2>
+
+                  <p>Властивість flex-basis вказує початковий розмір flex-елемента, перш ніж вільний простір розподілиться з іншими факторами контейнера чи елементів.</p>
+
+                  <div class="spoiler-container">
+                    <div class="spoiler-title">Детальніше</div>
+
+                    <div class="spoiler-content">
+                      <p>Властивість <code>flex-basis</code> приймає ті ж значення, які можуть приймати властивості <code>width</code> і <code>height</code>. Значення за замовчуванням: <code>auto</code>, яке встановлюється на основі значення <code>content</code>. Значення <code>content</code> задається автоматично, на основі розміру вмісту flex-елемента.</p>
+                    </div>
+                  </div>
+
+                  <div class="controls-container">
+                    <button class="basis-btn checked" data-value="auto">auto</button> 
+                    <button class="basis-btn" data-value="0">0</button> 
+                    <button class="basis-btn" data-value="30%">30%</button> 
+                    <button class="basis-btn" data-value="50%">50%</button> 
+                    <button class="basis-btn" data-value="100px">100px</button> 
+                    <button class="basis-btn" data-value="200px">200px</button> 
+                    <button class="basis-btn" data-value="initial">initial</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container basis-container">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item third-item" style="flex-basis: auto;"><span>3</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+                        }
+
+                        <br>
+
+                        .item {
+                          <div class="code-property">
+                            width: 100px;
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-3 {
+                          <div class="code-property">
+                            <mark>flex-basis: <span class="code-property-value">auto</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="child-flex">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#flex-common">flex</a></h2>
+
+                  <p>Властивість flex - це скорочений запис для властивостей flex-grow, flex-shrink та flex-basis. Значення за замовчуванням: initial, що відповідає значенню 0 1 auto.</p>
+
+                  <p><code>flex: &lt;flex-grow&gt; &lt;flex-shrink&gt; || &lt;flex-basis&gt;</code></p>
+                  
+                  <div class="controls-container">
+                    <button class="flex-short-btn checked" data-value="0 1 auto">initial</button> 
+
+                    <button class="flex-short-btn" data-value="1 1 auto">auto</button> 
+
+                    <button class="flex-short-btn" data-value="1 1 0">1</button> 
+
+                    <button class="flex-short-btn" data-value="0 0 150px">0 0 150px</button>  
+
+                    <button class="flex-short-btn" data-value="0 1 30%">0 1 30%</button> 
+
+                    <button class="flex-short-btn" data-value="1 0 30%">1 0 30%</button> 
+
+                    <button class="flex-short-btn" data-value="0 1 auto">0 1</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container flex-short-container">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item third-item" style="flex: 0 1 auto;"><span>3</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+                        }
+
+                        <br>
+
+                        .item {
+                          <div class="code-property">
+                            flex: 0 1 auto;
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-3 {
+                          <div class="code-property">
+                            <mark>flex: <span class="code-property-value">1</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="playground-container" id="flex-order">
+                  <h2><a href="https://www.w3.org/TR/css-flexbox/#order-property">order</a></h2>
+
+                  <p>Властивість order визначає порядок в якому будуть розміщені flex-елементи в контейнері. Значення елементів за замовчуванням 0, розміщаються один за одним в порядку їх додавання</p>
+
+                  <div class="controls-container">
+                    <div class="control-input"><label for="order-1">element 1: </label><input type="number" class="flex-order" data-order-input="1" id="order-1"></div>
+                    <div class="control-input"><label for="order-2">element 2: </label><input type="number" class="flex-order" data-order-input="2" id="order-2"></div>
+                    <div class="control-input"><label for="order-3">element 3: </label><input type="number" class="flex-order" data-order-input="3" id="order-3"></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container order-container">
+                        <div class="item" data-order-item="1"><span>1</span></div>
+                        <div class="item" data-order-item="2"><span>2</span></div>
+                        <div class="item" data-order-item="3"><span>3</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xll-4">
+                      <div class="code-container">
+                        .flex-container {
+                          <div class="code-property">
+                            display: flex;
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-1 {
+                          <div class="code-property">
+                            <mark>order: <span class="code-property-value" data-order-css="1">0</span>;</mark>
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-2 {
+                          <div class="code-property">
+                            <mark>order: <span class="code-property-value" data-order-css="2">0</span>;</mark>
+                          </div>
+                        }
+
+                        <br>
+
+                        .item-3 {
+                          <div class="code-property">
+                            <mark>order: <span class="code-property-value" data-order-css="3">0</span>;</mark>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             
+                <div class="playground-container" id="margin-align">
+                  <h2>Вирівнювання з margin</h2>
+
+                  <p>Властивість <code>margin</code> дозволяє створювати зовнішні відступи для flex-елементів</p>
+
+                  <div class="controls-container">
+                    <button class="control-btn checked" data-value="margin-top-auto">margin-top: auto</button> 
+                    <button class="control-btn" data-value="margin-bottom-auto">margin-bottom: auto</button> 
+                    <button class="control-btn" data-value="margin-left-auto">margin-left: auto</button> 
+                    <button class="control-btn" data-value="margin-right-auto">margin-right: auto</button> 
+                    <button class="control-btn" data-value="margin-auto">margin: auto</button> 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-8">
+                      <div class="flex-container margin-top-auto">
+                        <div class="item"><span>1</span></div>
+                        <div class="item"><span>2</span></div>
+                        <div class="item third-item"><span>3</span></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                      <div class="code-container">
+                        .flex-container {
+                        <div class="code-property">
+                          <mark><span class="code-property-value">margin-top: auto</span>;</mark>
+                        </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="main-footer">
+      </footer>
+
+      <script src="js/jquery-3.2.1.js"></script>
+      <script src="js/main.js"></script>
+      <script src="js/flexbox.js"></script>
+    </div>
+  </body>
+</html>
