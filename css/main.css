@@ -1689,7 +1689,9 @@ p {
       width: 80px;
       height: 80px; }
   .aside-toggle {
-    top: 20px; } }
+    top: 20px; }
+  #flex-align-content .third-item {
+    height: auto; } }
 
 @media screen and (max-width: 575px) {
   .flexbox-page .aside-nav {
@@ -1718,6 +1720,8 @@ p {
     .flex-container .item {
       width: 50px;
       height: 50px; }
+  #flex-align-content .third-item {
+    height: auto; }
   .aside-nav-close {
     width: 32px;
     height: 32px;
